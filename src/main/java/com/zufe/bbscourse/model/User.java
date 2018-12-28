@@ -1,6 +1,9 @@
 package com.zufe.bbscourse.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 public class User implements Serializable {
@@ -10,7 +13,7 @@ public class User implements Serializable {
     private long userId;
     private String username;
     private String password;
-    private int roles;
+    private String roles;
     private String college;
     private String profession;
 
@@ -46,11 +49,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public int getRoles() {
+    public String getRoles() {
         return roles;
     }
 
-    public void setRoles(int roles) {
+    public void setRoles(String roles) {
         this.roles = roles;
     }
 
@@ -76,10 +79,9 @@ public class User implements Serializable {
     }
 
     public Set<String> getRolesSet() {
-        if (roles == 0) {
+        if (roles == null || roles =="") {
             return null;
         }
-        return null;
-        // return Collections.unmodifiableSet(new HashSet<String>(Arrays.asList(getRoles().split(","))));
+         return Collections.unmodifiableSet(new HashSet<String>(Arrays.asList(getRoles().split(","))));
     }
 }

@@ -38,13 +38,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // auth.inMemoryAuthentication()
-        // .withUser("t").password("t").roles("USER")
-        // .and()
-        // .withUser("admin").password("admin").roles("ADMIN");
-
-        // auth.userDetailsService(this.myUserDetailsService()).passwordEncoder(this.bCryptPasswordEncoder());
-
+        auth.inMemoryAuthentication()
+                .withUser("t").password("t").roles("USER")
+                .and()
+                .withUser("admin").password("123456").roles("ADMIN");
+        auth.userDetailsService(this.myUserDetailsService()).passwordEncoder(this.bCryptPasswordEncoder());
         auth.authenticationProvider(this.authenticationProvider()); // different approach
     }
 

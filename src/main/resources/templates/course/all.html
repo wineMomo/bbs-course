@@ -1,0 +1,90 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="common/head :: head">
+<body>
+<div id="app">
+    <div data-v-e365d6e0="">
+        <div th:replace="common/header :: header"></div>
+        <div data-v-e365d6e0="" class="page-body">
+            <div data-v-7e8c1cc0="" data-v-e365d6e0="" class="body">
+                <section data-v-7e8c1cc0="" class="collection-plate">
+                    <div data-v-7e8c1cc0="" class="collect-title">收藏板块</div>
+                </section>
+                <section data-v-7e8c1cc0="" class="span"></section>
+                <ul data-v-7e8c1cc0="" class="area-list" th:each="colleage, currNum : ${colleages}">
+                    <li data-v-7e8c1cc0="" class="active"><h5 data-v-7e8c1cc0="" th:text="${colleage.key}"></h5>
+                        <ul data-v-7e8c1cc0="" class="boards" th:each="course, currNum : ${colleage.value}">
+                            <li data-v-7e8c1cc0="">
+                                <a data-v-7e8c1cc0="" th:href="@{/course/{courseId}(courseId=${course.id})}"
+                                   th:text="${course.courseName}" class=""></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <aside data-v-61180772="" data-v-e365d6e0="" class="help-aside">
+                <section data-v-61180772="" class="discussion launch">
+                    <button data-v-61180772="" type="button">
+                        发讨论
+                    </button>
+                    <section data-v-63f1b726="" data-v-61180772="" class="float-plates-list" style="display: none;">
+                        <div data-v-63f1b726="" class="dialog">
+                            <header data-v-63f1b726="">选择板块<img data-v-63f1b726=""
+                                                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABYCAYAAAEGkgCiAAAAAXNSR0IArs4c6QAAA/9JREFUeAHtnE1uEzEUx+2BBWtEz8A1kGCZsAKBhJBQ0wVKuAEgVWq5AalYJGWBkKjoimYJgmPAFfi4AZ1hnsmrHlM78ddkpug/i9rjeX7+z28c13ljR6n/4BgP57/5NsaDWcV5Z0oVbIaFtUZVXVJan1qvyULpUUqSNsinEZgM58fs4cng8B7nnSk9CJfhucddVPpBqau3Tm98YTKY3eQ8HjWTQGojYAYbMUJRb5RDha1OUJlpwGfY8/XaVNi8A18/sAMBEACBYAKu4dFVHtRA0wmdu2YIQY7JmJ1ndcoqQp2em9+wI5mS00IV90tVvpPlSfmmUjpPckiVm07ZYRbn7AwpCIAACIAACIBALgK7j15fmQzm70P8UYxlcvtwL6RO01Y3C0LOTWBnGfw7OBlddtWlySPPnmgm9XKxfeSyXVeeJJidu4TnFMptZRHMzqRwReTrI5Uo++bUa1LMxutSChgam6VYihOnPH5be1kIux69JL6qj9uEucqSBLuENhvLKTxaMA1PVVk+C+mjLPxgsRPdbhMGzkEABEAABEAABEAABEAABEAABEAABJIJ0Nd8ueLLxyFFOynq6WPrsokOVVFMon7f+pGCKS7nspxiEpWq7vz4Wb6R5aH5aMEUQKHGKIy6TjQHUCjWNl2M7oaKlPZJERifUJUUmyO+liSY7nyV6Nxiqb1kwS7RbYjNJrgp2qwf9niVQPVCjyyEuVHZPUh0jj7LvjmNHiXYgUz/Wa5bE143esi6vvlsgmWfDRnyfIWyXZYuIcVyN5DdIyTozcJcabJgm1hurA3RSYJXiW1LdLRgH7E20XWDt6aLnU98LTSN/9AFjLP0ro4/iKooboSKhD0IgAAIgAAIgAAIgAAIgAAIgAAIgAAIgAAIgAAIgAAIgAAIgAAIgAAIgAAIBBGIfn0f1IowHg9n+6pST01RvRCIdrrm3tlqFmbQz+0td8/qotiffth+LmRsLBu/3CBSoq7UZ7MsjOrXAGjpI621yLGAiXyQL7MrfQnXtFWWXyLlJlfbeA9mxc1eZsoje3ROX6wvV9oZYL6BFDgpdbn9ttPOAfMNhsAKsWX/XaW9AcwAVsEjG7P4lMdXKogcVqjqJo7eAeabtoLmi5T2HCxL7S1gEuiEfEHg0j30ErAVbA2VBPPc1uQvAOheAXaBlV9GfGwM/J786QXgGGgxdbpg3ingHJBy+GgTfCeA24DShs8c4DcOmDar0v7PM/GZ/1HZQGulj1O3b57pDcw4f8ov0I+3+da14uH3X6ffdKWv11OCV9OTUfTGGFujy8jc0d9dyvqxKvTXrav6hc0WZSAAAiAAAiAAAiAAAiAAAiAAAiAAAiAAAiAAAn0i8AekhoLx9SYcmQAAAABJRU5ErkJggg==">
+                            </header>
+                            <ul data-v-63f1b726="" class="plates">
+                                <li data-v-63f1b726=""><span data-v-63f1b726="" class="type">信息发布区</span>
+                                    <ul data-v-63f1b726="" class="boards">
+                                        <li data-v-63f1b726="">丁香园新站友成长版</li>
+                                        <li data-v-63f1b726="">丁香热点</li>
+                                        <li data-v-63f1b726="">医药生命科学动态跟踪</li>
+                                        <li data-v-63f1b726="">求职招聘版</li>
+                                        <li data-v-63f1b726="">丁香调查</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                    <section data-v-d95b66ba="" data-v-61180772="" class="float-plates-list" style="display: none;">
+                        <div data-v-d95b66ba="" class="dialog">
+                            <header data-v-d95b66ba="">参与讨论<img data-v-d95b66ba=""
+                                                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABYCAYAAAEGkgCiAAAAAXNSR0IArs4c6QAAA/9JREFUeAHtnE1uEzEUx+2BBWtEz8A1kGCZsAKBhJBQ0wVKuAEgVWq5AalYJGWBkKjoimYJgmPAFfi4AZ1hnsmrHlM78ddkpug/i9rjeX7+z28c13ljR6n/4BgP57/5NsaDWcV5Z0oVbIaFtUZVXVJan1qvyULpUUqSNsinEZgM58fs4cng8B7nnSk9CJfhucddVPpBqau3Tm98YTKY3eQ8HjWTQGojYAYbMUJRb5RDha1OUJlpwGfY8/XaVNi8A18/sAMBEACBYAKu4dFVHtRA0wmdu2YIQY7JmJ1ndcoqQp2em9+wI5mS00IV90tVvpPlSfmmUjpPckiVm07ZYRbn7AwpCIAACIAACIBALgK7j15fmQzm70P8UYxlcvtwL6RO01Y3C0LOTWBnGfw7OBlddtWlySPPnmgm9XKxfeSyXVeeJJidu4TnFMptZRHMzqRwReTrI5Uo++bUa1LMxutSChgam6VYihOnPH5be1kIux69JL6qj9uEucqSBLuENhvLKTxaMA1PVVk+C+mjLPxgsRPdbhMGzkEABEAABEAABEAABEAABEAABEAABJIJ0Nd8ueLLxyFFOynq6WPrsokOVVFMon7f+pGCKS7nspxiEpWq7vz4Wb6R5aH5aMEUQKHGKIy6TjQHUCjWNl2M7oaKlPZJERifUJUUmyO+liSY7nyV6Nxiqb1kwS7RbYjNJrgp2qwf9niVQPVCjyyEuVHZPUh0jj7LvjmNHiXYgUz/Wa5bE143esi6vvlsgmWfDRnyfIWyXZYuIcVyN5DdIyTozcJcabJgm1hurA3RSYJXiW1LdLRgH7E20XWDt6aLnU98LTSN/9AFjLP0ro4/iKooboSKhD0IgAAIgAAIgAAIgAAIgAAIgAAIgAAIgAAIgAAIgAAIgAAIgAAIgAAIgAAIBBGIfn0f1IowHg9n+6pST01RvRCIdrrm3tlqFmbQz+0td8/qotiffth+LmRsLBu/3CBSoq7UZ7MsjOrXAGjpI621yLGAiXyQL7MrfQnXtFWWXyLlJlfbeA9mxc1eZsoje3ROX6wvV9oZYL6BFDgpdbn9ttPOAfMNhsAKsWX/XaW9AcwAVsEjG7P4lMdXKogcVqjqJo7eAeabtoLmi5T2HCxL7S1gEuiEfEHg0j30ErAVbA2VBPPc1uQvAOheAXaBlV9GfGwM/J786QXgGGgxdbpg3ingHJBy+GgTfCeA24DShs8c4DcOmDar0v7PM/GZ/1HZQGulj1O3b57pDcw4f8ov0I+3+da14uH3X6ffdKWv11OCV9OTUfTGGFujy8jc0d9dyvqxKvTXrav6hc0WZSAAAiAAAiAAAiAAAiAAAiAAAiAAAiAAAiAAAn0i8AekhoLx9SYcmQAAAABJRU5ErkJggg==">
+                            </header>
+                            <textarea data-v-d95b66ba="" class="comment"></textarea>
+                            <button data-v-d95b66ba="" type="button" name="submitComment">回复</button>
+                        </div>
+                    </section>
+                </section>
+                <section data-v-61180772="" class="top-post hot">
+                    <header data-v-61180772="">综合热贴</header>
+                    <ul data-v-61180772="">
+                        <li data-v-61180772="">2019中国最好医科大学排名：北京协和医学院第一</li>
+                        <li data-v-61180772="">#危重每日 30s 问答# （有丁当奖励）高血压性脑出血最好发的部位是</li>
+                             </ul>
+                </section>
+                <section data-v-61180772="" class="top-post notice">
+                    <header data-v-61180772="">公告栏</header>
+                    <ul data-v-61180772="">
+                        <li data-v-61180772=""><a data-v-61180772="" href="http://www.dxy.cn/bbs/topic/40174199"
+                                                  target="_blank">丁香园论坛 2018 年度「优秀版主」评选：来为您喜爱的版主投上宝贵一票吧！</a></li>
+                        <li data-v-61180772=""><a data-v-61180772="" href="http://www.dxy.cn/bbs/topic/40203690"
+                                                  target="_blank">2018 年年度最佳病例评选：快来投票出你最喜欢的病例吧</a></li>
+                             </ul>
+                </section>
+                <section data-v-61180772="" class="top-post case">
+                    <header data-v-61180772="">最热病例</header>
+                    <ul data-v-61180772="">
+                        <li data-v-61180772="">头孢过敏，抢救方法来了！</li>
+                        <li data-v-61180772="">年轻女性咳嗽反反复复2个月，这是为什么？</li>
+                             </ul>
+                </section>
+            </aside>
+        </div>
+         </div>
+</div>
+
+<script src="//assets.dxycdn.com/assets/third-party/ravenjs/3.19.1.min.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

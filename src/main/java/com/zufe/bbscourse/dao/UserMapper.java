@@ -13,9 +13,15 @@ public interface UserMapper {
 
     List<User> findAll();
 
-    User findById(Long id);
+    User findById(int id);
+
+    List<User> findAllAdmin();
 
     User findByUsername(String username);
 
-    User findByEmail(String email);
+    User findByUserId(long userId);
+
+
+    int addAdmin(Long id );
+    int delete(Long Id);
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zufe.bbscourse.dao.EventMapper">
+    <resultMap id="EventResultMap" type="com.zufe.bbscourse.model.Event">
+        <id property="id" column="id"/>
+        <result property="userId" column="userId"/>
+        <result property="objId" column="objId"/>
+        <result property="objType" column="objType"/>
+        <result property="type" column="type"/>
+    </resultMap>
+    <insert id="save" parameterType="Event">
+        INSERT INTO `event` (userId, objId, objType,type,deleted)
+                 VALUES (#{userId}, #{objId}, #{objType},#{type},0)
+    </insert>
+
+    <select id="findByObjIdAndObjType" parameterType="java.util.Map" resultMap="EventResultMap">
+        SELECT
+           id,
+           userId,
+           objId,
+           objType,
+           type
+        FROM event
+        WHERE deleted = 0 and objId = #{objId} and objType= #{objType}
+    </select>
+
+</mapper>

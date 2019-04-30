@@ -1,0 +1,30 @@
+
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:fragment="copyright">
+<aside data-v-61180772="" data-v-0050fa64="" class="help-aside" >
+    <section data-v-61180772="" class="discussion launch"
+             onclick="comment_add('添加评论','comment-add','1080','2190')">
+        <button data-v-61180772="" type="button">
+            <i class="Hui-iconfont">&#xe600;</i> 评论
+        </button>
+    </section>
+    <section data-v-61180772="" class="top-post hot">
+        <header data-v-61180772="">综合热贴</header>
+        <ul data-v-61180772=""  th:each="course, currNum : ${courses}">
+            <li data-v-61180772="" th:text="${course.courseName}"
+                th:href="@{/course/{courseId}(courseId=${course.id})}"  ></li>
+        </ul>
+    </section>
+    <section data-v-61180772="" class="top-post notice">
+        <header data-v-61180772="">公告栏</header>
+        <ul data-v-61180772=""  th:each="course, currNum : ${courses}">
+            <li data-v-61180772=""><a data-v-61180772="" th:href="@{/course/{courseId}(courseId=${course.id})}" th:text="${course.courseName}"
+                                      target="_blank"></a></li>
+        </ul>
+    </section>
+    <section data-v-61180772="" class="top-post case">
+        <header data-v-61180772="">最热病例</header>
+        <ul data-v-61180772=""  th:each="course, currNum : ${courses}">
+            <li data-v-61180772=""> <a data-v-61180772="" th:href="@{/course/{courseId}(courseId=${course.id})}"  th:text="${course.courseName}"  target="_blank" ></a></li>
+        </ul>
+    </section> <!----> <!----> <!----> <!----> <!----></aside></div>

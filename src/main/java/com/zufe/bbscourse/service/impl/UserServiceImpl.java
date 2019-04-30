@@ -6,6 +6,7 @@ import com.zufe.bbscourse.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service("userService")
@@ -14,13 +15,19 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public int save(User user) {
-        return 0;
+    public boolean save(User user) {
+
+        return true;
     }
 
     @Override
-    public User findById(Long id) {
-        return null;
+    public List<User> findAllAdmin() {
+        return this.userMapper.findAllAdmin();
+    }
+
+    @Override
+    public User findById(int id) {
+        return this.userMapper.findById(id);
     }
 
     @Override
@@ -29,8 +36,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByEmail(String email) {
-        return null;
+    public User findByUserId(long userId) {
+        return this.userMapper.findByUserId(userId);
     }
 
     @Override
@@ -51,5 +58,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public Map<String, Object> confirmUserRegistrationWithToken(String token) {
         return null;
+    }
+
+    @Override
+    public int addAdmin(Long userId) {
+        return this.userMapper.addAdmin(userId);
+    }
+
+    @Override
+    public int delete(Long userId) {
+        return this.userMapper.delete(userId);
     }
 }

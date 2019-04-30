@@ -1,0 +1,169 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="common/head :: head">
+<body>
+<div id="app">
+    <div data-v-3fdebdec="" class="page-wrap">
+        <div th:replace="common/header :: header"></div>
+        <div data-v-3fdebdec="" class="page-body" style="top: 44px;">
+            <section data-v-e18c4128="" data-v-3fdebdec="" class="topic-body">
+                <header data-v-e18c4128="" class="title" th:utext="${comment.commentContenet}"></header>
+                <section data-v-e18c4128="" class="user-info">
+                    <div data-v-e18c4128="" class="user-wrap">
+                        <!--<div data-v-e18c4128="" class="avatar img-wrap"><img data-v-e18c4128=""
+                                                                             src="https://img1.dxycdn.com/2018/1223/684/3319069993895134410-16.jpg!w120">
+                        </div>-->
+                        <div data-v-e18c4128="" class="info-wrap"><p data-v-e18c4128="" class="username"
+                                                                     th:utext="${comment.user.username}"></p>
+                            <time data-v-e18c4128="" class="publish-date">02-16 10:55</time>
+                        </div>
+                    </div>
+                    <div data-v-e18c4128="" class="user-follow">
+                        <a id = "btn" th:text="关注" th:onclick="'javascript:comment_follow(\''+${comment.id}+'\');'"></a>
+                    </div>
+                </section>
+                <article data-v-e18c4128="" class="article">
+                    <section data-v-e18c4128="" class="operate">
+                        <div data-v-e18c4128="" class="thumb"><img data-v-e18c4128=""
+                                                                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAABQdJREFUaAXtmW1IpFUUx+dNzWTcbctciaR1xazdICIqKYpYet1gt2Bd+taXzSIIhMB8d1Bxhin8MH2xPghBUfYhIiJcCiyIspa1CDSQXsbeXRab2pzxZcZ+5/G5Mtve52XUaYaYB673zj3nnvv/n3vuee599HhKT8kDO/KAd0ejXQ4eGhq6Np1OR1G/m5Lxer0vNzc3h1tbW1ddmrBU81lKdkmwsbHhA/wk9UlKHeWaTCYTmpubOxMOh/fsdBr/Tg04jS8rK7sdwM/j9XhlZeVN6L8FiRbK4fX19f1TU1PvONmwk+d9BQDfKAAAPN3R0fFTT0/PZ+Xl5Y9A6G+6nxgcHHzQDqCTLO8EAFAvIAD8rQLT2dn5A78H5DcEn1T926nzTgDPX2cC+zEboN/vf01+Iz+S3Z9rO68EAOelPCCg8PjZbHDd3d2/8vs3SvXw8HBdtiyXdl4JAKwFMBJCC319fdMaYL+YfVdqZK668kqALNNtonhdh4ZVSZv95Tq5m768EQiFQhLbDwMyQdZ5wQLM5dLPRpaMtK0nLwRGR0f3guYVQQSBcFdX13kdOvaHEftVVVXndHI3fXkhkEgkxgF3APDTtbW1L+qAmG/hfcgutLe3L+l03PTtOgFC5yUmPg74JVLlyba2tjUdEPaHvJXlmUV3Y7OZ+99dJTAwMBDD888AI0U5wVs3bgWJuL9FZID/2krHTX/AjZKTzsTEhJ/DmYB/Gt0Unj/W29v7od04dOVkKs8nm9X2/mqP05FIJJhMJvsweSvFiaSs4o0U2bgpPHq8v79/krblA3gvobaIwlXmCvxpqYwAfUm335HNIiSEb7J1tQQIhTdRas1WdGoDZIVyhBeWo0d5wd28trY242Tz33LsJyjHmOMjJbPy7v2iQCgcZYCtd1CrY0NOUP/uBrzYxebPPp/vLmm7eVgBedE9Tn2KOkK5Q42zIiCb0MMkM+aZRelfUnMcPiCdGM9cIrToIAwk7+eU+0dGRr5cWVk5xTyHss1qsxAeMvIy9RXZyoVsk7UuM+c3nKuwaAkg/EMUGCQbsygePH9QgODU77MB2RJgUNEQ4F6tQmfWNQFWoGhCCGcaLz7Af+VIAGV1NimaFQD0bQKczPiFIwEUjD1AXRQExsbG5Nh9mPhP19TUXHSz0+4BFA0CxbIHFhcXJe8HwDPD4XCZ9tZjRaCo0igb+B4T8cdbyM2GFYGiCiEiwiBA7Y4A5IqGQDQarSJ0WiT+q6urt85AaiW0K6CyEHXB02gqlRLvy1noDDc35ViF36MloDYxWnu3NAvUIP7vM6c+rYOgJUCuVUwLTgBnPiTAweSeQGNjo0GAwXsII+2dQeeN3e7jpHuQ+a8Hx1JTU9OnOvvaFeAfD2kG/cVgfywWC+oG/hd9zH9U5qGeFEy6ObUETEVjFZaXlwsWRpzFDALcS97TgZc+SwKwNl5mq6urBclEpM+riYJ7wbgeCATez5kAA4wVoLZdgYqKiqRpfN/4+Li6dFjN57qflX8WJ5ZB4l2rL3tizOpKKReH8xiQ+Nsvn01sZj7HJ5U59G5YWFj4gK8NIUh93tDQcMFmjK1ofn7+EPfs50QJHFE7ZUsCDJJd/yjA3pidvegOYWkP3TsRnubl43E7xtLYpuBVPhRos48aZ0mgvr4+Fo/Hm1F8DC+4ykQQQNWr0q7rS74Co2rsJDHzdjAYfEr1leqSB0oe+J964B8SxdDwDXCRJgAAAABJRU5ErkJggg=="
+                                                                   class="img-thumb"> <span data-v-e18c4128=""
+                                                                                            class="text-thumb">
+                            <a href="javascript:;" onclick="comment_up(this,'${comment.id}')">点赞</a></span>
+                        </div>
+                        <div data-v-e18c4128="" class="collect"><img data-v-e18c4128=""
+                                                                     src="data:image/png;base64,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"
+                                                                     class="img-collect"> <span data-v-e18c4128=""
+                                                                                                class="text-collect">
+                            <a href="javascript:;" onclick="comment_like(this,'${comment.id}')">收藏</a></span>
+                        </div>
+                    </section>
+                </article>
+            </section> <!---->
+            <section data-v-3fdebdec="" class="bar"></section>
+            <section data-v-6734385d="" data-v-3fdebdec="" class="discuss-body">
+                <section data-v-6734385d="" class="banner"><span data-v-6734385d=""
+                                                                 class="banner-title"> 全部讨论 </span>
+                </section>
+                <section data-v-6734385d="" class="reply-body" th:each="comment_child, currNum : ${comment_childs}">
+                    <section data-v-6734385d="" class="user-info">
+                        <div data-v-6734385d="" class="avatar img-wrap"><img data-v-6734385d=""
+                                                                             src="https://img.dxycdn.com/avatars/120/07/37/ab/473003/5.jpg">
+                        </div>
+                        <div data-v-6734385d="" class="info-wrap"><p data-v-6734385d="" class="username"
+                                                                     th:utext="${comment_child.user.username}"></p>
+                            <time data-v-6734385d="" class="publish-date">02-16 11:26</time>
+                        </div>
+                    </section>
+                    <article data-v-6734385d="" class="article" th:utext="${comment_child.commentContenet}"></article>
+                </section>
+                <section data-v-3fdebdec="" class="bar"></section>
+                <section data-v-3fdebdec="" class="bar"></section>
+            </section>
+            <aside data-v-61180772="" data-v-3fdebdec="" class="help-aside">
+                <section data-v-61180772="" class="discussion join">
+                    <button data-v-61180772="" type="button">
+                        <!--  <a href="javascript:;" onclick="comment_add('参与讨论','comment-add','800','500')"
+                             class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 参与讨论</a>-->
+                    </button>
+                </section>
+                <section data-v-30574492="" data-v-61180772="" class="recommend-post">
+                    <header data-v-30574492="" class="title">推荐帖子</header>
+                    <section data-v-30574492="" class="post-item" th:each="comment, currNum : ${comments}"><!---->
+                        <div data-v-30574492="" id="copybtn">
+                            <div data-v-30574492="" class="item-title">
+                                <a th:text="${comment.commentTitle}"
+                                   th:href="@{/comment/{commentId}(commentId=${comment.id})}"></a></div>
+                            <div data-v-30574492="" class="item-desc"><span data-v-30574492="">${comment.view}</span>
+                                <span
+                                        data-v-30574492="">阅读</span> <span data-v-30574492="">·</span> <span
+                                        data-v-30574492="">${comment.vote}</span> <span data-v-30574492="">投票</span>
+                                <span
+                                        data-v-30574492="">·</span> <span data-v-30574492="">${comment.reply}</span>
+                                <span
+                                        data-v-30574492="">回复</span></div>
+                        </div>
+                    </section>
+                </section>
+            </aside>
+        </div>
+    </div>
+</div>
+<!-- built files will be auto injected -->
+<script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
+<script src="//assets.dxycdn.com/assets/docs/js/gt.js?t=1550316100425"></script>
+<div>
+    <input type="hidden" id="J-enable-code" value="1">
+    <input type="hidden" id="J-enable-geetest" value="1">
+</div>
+
+<script src="//assets.dxycdn.com/assets/third-party/ravenjs/3.19.1.min.js" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript"
+        src="//assets.dxycdn.com/gitrepo/bbs_touch_v2/dist/static/js/manifest.js?t=1550316100425"></script>
+<script type="text/javascript"
+        src="//assets.dxycdn.com/gitrepo/bbs_touch_v2/dist/static/js/vendor.js?t=1550316100425"></script>
+<script type="text/javascript">
+
+    /* function comment_add(title, url, w, h) {
+        layer_show(title, url, w, h);
+    } */
+
+    /*关注*/
+    function comment_follow(id) {
+        debugger
+        var bnt =document.getElementById("btn");
+       // var _$this = $(this);
+        debugger
+      //  _$this.data('value', _$this.text()).text('Loading');
+        bnt.hasClass('active') ?
+            $.ajax({
+                type: "post",
+                url: '/event',
+                data: {
+                    id: id,//params.pageNo || 1,
+                    type: 1,// params.keyword || "",
+                    deleted: 1
+                },
+                async: false,
+                success: function (data) {
+                    bnt.text('关注').removeClass('active');
+                }//,
+                //_$this.text(_$this.data('value'));
+
+            }) :
+            $.ajax({
+                type: "post",
+                url: '/event',
+                data: {
+                    id: id,
+                    type: 1,
+                    deleted: 0
+                },
+                async: false,
+                success: function (data) {
+                    bnt.text('已关注').addClass('active');
+                },//else {
+                //     _$this.text(_$this.data('value'));
+
+            });
+    }
+
+    /*   $.post('/event', {id: id, type: 1, deleted: 1}, function (d) {
+                    debugger
+                    if (success) {
+                        _$this.text('关注').removeClass('active');
+                    } else {
+                        _$this.text(_$this.data('value'));
+                    }
+                }) :
+                $.post('/event', {id: id, type: 1, deleted: 0}, function (d) {
+                    if (success) {
+                        _$this.text('已关注').addClass('active');
+                    } else {
+                        _$this.text(_$this.data('value'));
+                    }
+                });*/
+</script>
+</body>
+</html>

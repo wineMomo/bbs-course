@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class User implements Serializable {
-    private static final long serialVersionUID = 1L;
 
+    private static final long serialVersionUID = -2223402515001951606L;
     private int id;
     private long userId;
     private String username;

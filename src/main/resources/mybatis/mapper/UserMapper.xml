@@ -1,37 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zufe.bbscourse.dao.UserMapper" >
-   <!-- <sql id="BASE_TABLE">
-    user
-  </sql>
-    <sql id="BASE_COLUMN">
-    userId,username,password
-  </sql>
+<mapper namespace="com.zufe.bbscourse.dao.UserMapper">
+    <!-- <sql id="BASE_TABLE">
+     user
+   </sql>
+     <sql id="BASE_COLUMN">
+     userId,username,password
+   </sql>
 
-    <insert id="insert" parameterType="com.zufe.bbscourse.model.User">
-        INSERT INTO
-        <include refid="BASE_TABLE"/>
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            userName,password,
-        </trim>
-        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
-            #{userName, jdbcType=VARCHAR},#{password, jdbcType=VARCHAR},
-        </trim>
-    </insert>
+     <insert id="insert" parameterType="com.zufe.bbscourse.model.User">
+         INSERT INTO
+         <include refid="BASE_TABLE"/>
+         <trim prefix="(" suffix=")" suffixOverrides=",">
+             userName,password,
+         </trim>
+         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+             #{userName, jdbcType=VARCHAR},#{password, jdbcType=VARCHAR},
+         </trim>
+     </insert>
 
-    <select id="selectUsers" resultType="com.zufe.bbscourse.model.User">
-        SELECT
-        <include refid="BASE_COLUMN"/>
-        FROM
-        <include refid="BASE_TABLE"/>
-    </select>
--->
+     <select id="selectUsers" resultType="com.zufe.bbscourse.model.User">
+         SELECT
+         <include refid="BASE_COLUMN"/>
+         FROM
+         <include refid="BASE_TABLE"/>
+     </select>
+ -->
 
     <resultMap id="UserResultMap" type="com.zufe.bbscourse.model.User">
         <id property="id" column="id"/>
         <result property="userId" column="userId"/>
         <result property="username" column="username"/>
-        <result property="password" column="password"/>
         <result property="roles" column="roles"/>
         <result property="college" column="college"/>
         <result property="profession" column="profession"/>
@@ -43,11 +42,41 @@
             id,
             userId,
             username,
-            password,
             roles,
             college,
             profession
         FROM user
         WHERE username = #{username}
     </select>
+
+    <select id="findByUserId" parameterType="long" resultMap="UserResultMap">
+        SELECT
+            id,
+            userId,
+            username,
+            roles,
+            college,
+            profession
+        FROM user
+        WHERE userId = #{userId}
+    </select>
+    <select id="findAllAdmin" resultMap="UserResultMap">
+        SELECT
+            id,
+            userId,
+            username,
+            roles,
+            college,
+            profession
+        FROM user
+        WHERE  roles= 'ADMIN'
+    </select>
+    <update id="addAdmin" parameterType="Long">
+        update  user set roles = 'ADMIN' where userId = #{id};
+    </update>
+
+
+    <update id="delete" parameterType="Long">
+        update  user set roles = 'ADMIN' where id = #{userId};
+    </update>
 </mapper>

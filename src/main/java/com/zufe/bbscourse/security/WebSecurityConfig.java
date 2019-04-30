@@ -48,11 +48,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        //spring boot 不允许加载iframe问题解决
+        http.headers().frameOptions().disable();
+        //end
         http.csrf().disable().authorizeRequests().antMatchers("/user/settings").authenticated() // order matters
-                .antMatchers("/", "/js/**", "/css/**", "/images/**", "/fonts/**", "/bootstrap-select/**",
+                .antMatchers("/**", "/js/**", "/css/**", "/images/**", "/fonts/**", "/bootstrap-select/**",
                         "/bootstrap-datetimepicker/**", "/custom/**", "/daterangepicker/**", "/chartjs/**")
                 .permitAll() // these paths are configure not to require any authentication
-                .antMatchers("/post/**").permitAll() // all posts are allowed to be viewed without authentication
+                .antMatchers("/course/**").permitAll() // all posts are allowed to be viewed without authentication
+                .antMatchers("/admin/**").permitAll()
                 .antMatchers("/user/**").permitAll() // all user profiles are allowed to be viewed without
                 // authentication
                 .antMatchers("/category/**").permitAll() // all categories are allowed to be viewed without

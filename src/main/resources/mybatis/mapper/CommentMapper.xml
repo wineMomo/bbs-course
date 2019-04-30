@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zufe.bbscourse.dao.CommentMapper" >
+    <resultMap id="CommentResultMap" type="com.zufe.bbscourse.model.Comment">
+        <id property="id" column="id"/>
+        <result property="userId" column="userId"/>
+        <result property="commentContenet" column="commentContenet"/>
+        <result property="parentId" column="parentId"/>
+
+        <result property="user.username" column="username"/>
+        <result property="user.userId" column="userId"/>
+
+        <result property="course.courseName" column="courseName"/>
+        <result property="course.id" column="courseId"/>
+
+        <result property="course.courseName" column="courseName"/>
+        <result property="course.id" column="courseId"/>
+
+        <result property="likeCnt" column="likeCnt"/>
+        <result property="replyCnt" column="replyCnt"/>
+
+
+
+    </resultMap>
+
+
+
+    <select id="findAll" resultMap="CommentResultMap">
+        SELECT
+            id,
+            userId,
+            commentContenet,
+            parentId
+        FROM comment
+        WHERE  deleted = 0
+    </select>
+
+
+
+    <select id="findByCommentId"   parameterType="int" resultMap="CommentResultMap">
+        SELECT
+            a.id ,
+            a.userId,
+            a.commentContenet,
+            a.parentId,
+            b.username,
+            b.userId
+        FROM comment  a left join user b on a.userId = b.userId
+        WHERE  a.id = #{commentId}  and deleted = 0
+    </select>
+
+
+    <select id="findListByCourseId" parameterType="int" resultMap="CommentResultMap">
+        SELECT
+            a.id,
+            a.userId,
+            a.commentContenet,
+            a.parentId,
+            b.username,
+            b.userId
+        FROM  ( select * from comment  WHERE parentId = #{courseId} and deleted = 0)  a
+         left join user b
+         on a.userId = b.userId
+         left join  (select  objId ,count(1) as likeCnt
+                      from event
+                      where deleted = 0 and objType=2  and type = 5 group by objId
+                      ) c
+         on a.id = c.objId
+         left join  (select  parentId ,count(1) as replyCnt
+                      from comment_child  where  deleted = 0  group by parentId
+                      ) d
+        on a.id=d.parentId
+    </select>
+
+    <select id="findListByCommentId" parameterType="int" resultMap="CommentResultMap">
+        SELECT
+            a.id,
+            a.userId,
+            a.commentContenet,
+            a.parentId,
+            b.username,
+            b.userId,
+            likeCnt,
+            d.replyCnt
+        FROM ( select * from comment_child  WHERE parentId = #{commentId} and deleted = 0)  a
+         left join user b
+         on a.userId = b.userId
+         left join  (select  objId ,count(1) as likeCnt
+                      from event
+                      where deleted = 0 and objType=2  and type = 5 group by objId
+                      ) c
+         on a.id = c.objId
+         left join  (select  parentId ,count(1) as replyCnt
+                      from comment_child  where  deleted = 0  group by parentId
+                      ) d
+        on a.id=d.parentId
+    </select>
+
+
+    <select id="findLastCommentList" parameterType="java.util.Map" resultMap="CommentResultMap">
+        SELECT
+            a.id,
+            a.userId,
+            a.commentContenet,
+            a.parentId,
+            b.username,
+            c.courseName
+        FROM comment a  join user b on a.userId= b.userId  join course c on a.parentId = c.id
+        order by a.updateTime desc limit ${offset} ,${pageSize}
+    </select>
+
+    <insert id="save">
+        INSERT INTO `comment` (userId, commentContenet, parentId) VALUES (#{userId}, #{commentContenet}, #{parentId})
+    </insert>
+</mapper>

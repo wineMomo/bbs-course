@@ -1,33 +1,164 @@
-
 <!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="common/head :: head">
+<body>
+<div id="app">
+    <div data-v-0050fa64="">
+        <div th:replace="common/header :: header"></div>
 
-    <title>Signin Template for Bootstrap</title>
+        <section data-v-0050fa64="" class="page-body">
+            <div data-v-0050fa64="" class="page-body-wrap">
+                <div data-v-f0b39516="" data-v-0050fa64="" class="recommend-container" id = "tab">
+                    <header data-v-f0b39516="" class="recomend-title">推荐</header>
+                </div>
+                <section data-v-0050fa64="" class="btn-more"> <span data-v-0050fa64="">
+                    <a id = "but" href="javascript:(0)">查看更多</a></span></section>
 
-    <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
-</head>
 
-<body class="text-center">
-<form class="form-signin">
-    <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" value="remember-me"> Remember me
-        </label>
+                <div data-v-057eda9e="" data-v-0050fa64="" class="hot-plate">
+                    <section data-v-057eda9e="" class="span"></section>
+                    <section data-v-057eda9e="" class="plate-content">
+                        <header data-v-057eda9e="" class="hot-title">热门课程
+                        </header>
+
+                        <a data-v-057eda9e="" th:each="course, currNum : ${courses}" th:text="${course.courseName}"
+                           th:href="@{/course/{courseId}(courseId=${course.id})}" class="plate-item">
+                        </a>
+
+                    </section>
+                    <a data-v-057eda9e="" href="/course/all" class="more-plates"><span data-v-057eda9e="">查看全部课程</span>
+                        <img data-v-057eda9e=""
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAeCAYAAAAhDE4sAAAAAXNSR0IArs4c6QAAAS9JREFUSA2l1s0NgjAUB3AemjiBC2B0ASdwAS/GizcPnEicgRmMnoyRkxfjDE7AAhpZgAlMVMy/WkFp6VcTKBT45bV5bfG8T1lMdn0c/N60JnwQjber4llEuCaipDsMwjge3XGvWwhR3G+Pc/UDIu/QHfZmJphfBfh1UXjTPL3u4/jU5m2q2l8e5xd05/9FU4xFhDFBd1wwNtgA0A10B5H8gzpj9oVcsR/IBatBtpgQssGkkCnWCJlgwswGwAumCaaLPM+yDd5VRlSC8jxrd1oDZUQcUtVaUHPWU4L5qoSaESw3QYhoG8dIjZRrlhQyQaQRmSJCyAapQbbID+SCfCFXBBDLozzNNrZLLBAU4b7GHhjubcLM1lnsWRiV03tf82nN295bdpmxvF27dv2JeAEBZQ1my/VtOAAAAABJRU5ErkJggg=="
+                             class="arrow-img"></a>
+                    <section data-v-057eda9e="" class="span"></section>
+                </div>
+                <div data-v-0050fa64="" class="home-content">
+                    <div data-v-0ffed46f="" data-v-0050fa64="" class="article-list"  id = "lasttab">
+
+                    </div>
+
+                </div>
+                   <section data-v-0050fa64="" class="btn-more"> <span data-v-0050fa64="">
+                    <a id = "last" href="javascript:(0)">查看更多</a></span></section>
+
+                <section data-v-0050fa64="" class="span"></section> <!---->
+
+                <span id="saild"></span>
+
+
+            </div>
+
+            <!----></section>
+
+
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-</form>
+</div>
+<!-- built files will be auto injected -->
+<!--<script type="text/javascript" src="https://auth.dxy.cn/account/userlogin.do?callback=_da_oun" async=""></script><script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script type="text/javascript" async="" src="http://da.dxy.cn/da.js"></script><script src="//assets.dxycdn.com/assets/docs/js/gt.js?t=1547549703379"></script>
+-->
+<div>
+    <input type="hidden" id="J-enable-code" value="">
+    <input type="hidden" id="J-enable-geetest" value="">
+</div>
+
+<script src="//assets.dxycdn.com/assets/third-party/ravenjs/3.19.1.min.js" crossorigin="anonymous"></script>
+
 </body>
 </html>
+<script>
+    $(function () {
+        var i = 0 ;
+        $("#but").on("click", function () {
+            debugger
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: '/course/recommend',
+                data: {
+                    offset: i,//params.pageNo || 1,
+                    pageSize:2,// params.keyword || "",
+                    userId:1
+                },
+                async: false,
+                error: function () {
+                    alert("提交失败");
+                },
+                success: function (data) {
+                    var htm = ''
+                    data.map((item, index) => {
+                        htm += "<section data-v-f0b39516=\"\" class=\"recommend-item\">\n" +
+                            "        <div data-v-f0b39516=\"\" class=\"item-content long\">\n" +
+                            "            <div data-v-f0b39516=\"\" class=\"item-title\">" + "<a href=\"http://localhost:8080/course/"+item.id+"\" >"+item.courseName+"</a></div>\n" +
+                            "            <div data-v-f0b39516=\"\" class=\"item-desc\">" + item.courseTeacher + "</div>\n" +
+                            "        </div>\n" +
+                            "    </section>"
+                    }
+                )
+                    i++;
+                    $("#tab").append(htm);
+                }
+            });
+        })
+        $("#but").click();
+        test();
+        getLast();
+})
+
+    function test(){
+
+        $.ajax({
+            type: "get",
+            url: '/course/hot',
+            async: false,
+            success: function (data) {
+                $("#saild").append(data);
+            }
+        });
+    }
+
+
+
+    function getLast(){
+        var j = 0 ;
+        $("#last").on("click", function () {
+            debugger
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: '/comment/last',
+                data: {
+                    offset: j,//params.pageNo || 1,
+                    pageSize:2,// params.keyword || "",
+                    userId:1
+                },
+                async: false,
+                error: function () {
+                    alert("提交失败");
+                },
+                success: function (data1) {
+                    var htm = ''
+                    data1.map((item, index) => {
+                         htm += "<div data-v-0ffed46f=\"\" class=\"article-item\">\n" +
+                            "               <div data-v-0ffed46f=\"\" class=\"userinfo\"><img data-v-0ffed46f=\"\"\n" +
+                            "                  src=\"https://img1.dxycdn.com/2019/0111/608/3322542159273681324-16.jpg!w120\"\n" +
+                            "                           class=\"user-avatar\"> <span data-v-0ffed46f=\"\"\n" +
+                            "                               class=\"user-desc\">"+item.user.username+"</span>\n" +
+                            "                            </div>\n" +
+                            "                            <div data-v-0ffed46f=\"\" class=\"content-wrap\">\n" +
+                            "                                <div data-v-0ffed46f=\"\" class=\"title\"> <a href = \"http://localhost:8080/course\">"+item.course.courseName+"</a> </div>"+item.commentContenet +"</div>\n" +
+                            "                                <div data-v-0ffed46f=\"\" class=\"operate\">\n" +
+                            "                                    51804 阅读 ·"+ item.likeCnt+ "点赞 ·"+item.replyCnt+"  回复\n" +
+                            "                                </div>\n" +
+                            "                            </div>\n" +
+                            "                            <section data-v-0ffed46f=\"\" class=\"span\"></section>\n" +
+                            "                        </div>"
+                       }
+                    )
+                    j++;
+                    $("#lasttab").append(htm);
+                }
+            });
+        })
+        $("#last").click();
+    }
+</script>
